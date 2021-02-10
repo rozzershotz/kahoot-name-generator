@@ -12,17 +12,29 @@ def GetNumberFromUser(message, errormessage):
     integer = int(stringInput)
     return integer
 
-adjectives = ["attractive","bald","beautiful","chubby","clean","dazzling","drab", "useless", "idiotic", "ferergt", "disgusting", "dead", "dying",]
+# list of adjectives
+adjectives = ["Attractive","Bald","Beautiful","Chubby","Clean","Dazzling","Drab", "Useless", "Idiotic", "Ferergt", "Disgusting", "Dead", "Dying",]
 
-
+# list of animals
 animals = ["Cow","Rabbit","Ducks","Shrimp","Pig","Goat","Crab","Deer","Bee","Sheep","Fish","Turkey","Dove","Chicken","Horse"]
 
-GetNumberFromUser("what is the number of players that you would like: ", "NOT A NUMBER BAKA")
+# get number of players from the user
+NumOfPlayers = GetNumberFromUser("what is the number of players that you would like: ", "NOT A NUMBER BAKA")
+if NumOfPlayers > 10:
+    print("too big bucko, i'm changing it lol")
+    NumOfPlayers = 10
+elif NumOfPlayers < 2:
+    print("too smoll mi amigo, i'm changing it lol")
+    NumOfPlayers = 2
 
-def NameGenerator():
-    Number = integer
-    if Number >= 10:
-        print("too big bucko")
-        GridSize = 20
-    elif GridSize <= 2:
-        print("too smoll mis amigo")
+# generate names for the number of players 
+NaMeS = []
+for i in range(1, NumOfPlayers + 1):
+    naming = random.choice(adjectives) + random.choice(animals)
+    NaMeS.append(naming)
+
+for name in NaMeS:
+    print(name)
+
+# make up 3 scores, with usernames in order
+# def NameGenerator():
