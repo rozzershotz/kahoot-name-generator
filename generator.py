@@ -1,5 +1,23 @@
 import random
-print ("HELLO!!!")
+print ('''
+ /$$   /$$ /$$$$$$$$ /$$       /$$        /$$$$$$  /$$ /$$ /$$ /$$
+| $$  | $$| $$_____/| $$      | $$       /$$__  $$| $$| $$| $$| $$
+| $$  | $$| $$      | $$      | $$      | $$  \ $$| $$| $$| $$| $$
+| $$$$$$$$| $$$$$   | $$      | $$      | $$  | $$| $$| $$| $$| $$
+| $$__  $$| $$__/   | $$      | $$      | $$  | $$|__/|__/|__/|__/
+| $$  | $$| $$      | $$      | $$      | $$  | $$                
+| $$  | $$| $$$$$$$$| $$$$$$$$| $$$$$$$$|  $$$$$$/ /$$ /$$ /$$ /$$
+|__/  |__/|________/|________/|________/ \______/ |__/|__/|__/|__/
+                                                               
+''')
+
+class Player:
+    def PrintName(self):
+        print(self.name)
+    def PrintNameAndScore(self):
+        print(self.name + " --> " + str(self.score))
+    name = ""
+    score = 0
 
 def GetNumberFromUser(message, errormessage):
     ValidInputGiven = False
@@ -23,18 +41,31 @@ NumOfPlayers = GetNumberFromUser("what is the number of players that you would l
 if NumOfPlayers > 10:
     print("too big bucko, i'm changing it lol")
     NumOfPlayers = 10
-elif NumOfPlayers < 2:
+elif NumOfPlayers < 3:
     print("too smoll mi amigo, i'm changing it lol")
-    NumOfPlayers = 2
+    NumOfPlayers = 3
 
-# generate names for the number of players 
-NaMeS = []
+# generate names for the number of players
+Players = []
 for i in range(1, NumOfPlayers + 1):
-    naming = random.choice(adjectives) + random.choice(animals)
-    NaMeS.append(naming)
+    player = Player()
+    # TODO: make a thing to prevent duplicate names
+    player.name = random.choice(adjectives) + random.choice(animals)
+    Players.append(player)
 
-for name in NaMeS:
-    print(name)
+print("")
+print("PLAYERS")
+print("")
+for player in Players:
+    player.PrintName()
 
-# make up 3 scores, with usernames in order
-# def NameGenerator():
+# make up scores, with usernames in order
+for player in Players:
+    player.score =  random.randrange(0, 10000)
+
+print("")
+print("LEADERBOARD")
+print("")
+Players.sort(key= lambda player: player.score, reverse=True)
+for player in Players[:3]:
+    player.PrintNameAndScore()
