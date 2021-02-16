@@ -1,4 +1,6 @@
 import random
+import time
+
 print ('''
  /$$   /$$ /$$$$$$$$ /$$       /$$        /$$$$$$  /$$ /$$ /$$ /$$
 | $$  | $$| $$_____/| $$      | $$       /$$__  $$| $$| $$| $$| $$
@@ -11,15 +13,18 @@ print ('''
                                                                
 ''')
 
+# represents a player
 class Player:
     def PrintName(self):
-        print(self.name)
+        print(str(self.number) + " - " + self.name + " " + self.emoji)
     def PrintNameAndScore(self):
-        print(self.name + " --> " + str(self.score))
+        print(str(self.number) + " - " + self.name + " " + self.emoji + " --> " + str(self.score))
     name = ""
     score = 0
+    number = 0
+    emoji = ""
 
-def GetNumberFromUser(message, errormessage):
+def GetNumberFromUser(message, errormessage): 
     ValidInputGiven = False
     while ValidInputGiven == False:
         stringInput = input(message)
@@ -30,11 +35,19 @@ def GetNumberFromUser(message, errormessage):
     integer = int(stringInput)
     return integer
 
+def LoadingAnimation():
+    for i in range(1, 20):
+        print("█" + " ", end="")
+        time.sleep(0.1)
+
 # list of adjectives
 adjectives = ["Attractive","Bald","Beautiful","Chubby","Clean","Dazzling","Drab", "Useless", "Idiotic", "Ferergt", "Disgusting", "Dead", "Dying",]
 
 # list of animals
 animals = ["Cow","Rabbit","Ducks","Shrimp","Pig","Goat","Crab","Deer","Bee","Sheep","Fish","Turkey","Dove","Chicken","Horse"]
+
+# list of emojis
+emojis = ["😀", "😃", "😄", "😁", "😆", "😅", "🤣", "😂", "🙂", "🙃", "😉", "😊", "😇", "🥰", "😍", "🤩"]
 
 # get number of players from the user
 NumOfPlayers = GetNumberFromUser("what is the number of players that you would like: ", "NOT A NUMBER BAKA")
@@ -49,10 +62,13 @@ elif NumOfPlayers < 3:
 Players = []
 for i in range(1, NumOfPlayers + 1):
     player = Player()
+    player.number =  i
     # TODO: make a thing to prevent duplicate names
     player.name = random.choice(adjectives) + random.choice(animals)
+    player.emoji = random.choice(emojis)
     Players.append(player)
 
+# player names
 print("")
 print("PLAYERS")
 print("")
@@ -63,6 +79,10 @@ for player in Players:
 for player in Players:
     player.score =  random.randrange(0, 10000)
 
+# loading animation and leaderboard
+print("")
+LoadingAnimation()
+print("")
 print("")
 print("LEADERBOARD")
 print("")
